@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>철학사 타임라인</title>
+    <title>심신문제 중심 철학사 타임라인</title>
     <style>
       :root {
         color-scheme: light;
@@ -83,23 +83,24 @@
   </head>
   <body>
     <main>
-      <h1>철학사 타임라인</h1>
+      <h1>심신문제 중심 철학사 타임라인</h1>
       <p class="subtitle">
-        이름을 클릭하면 핵심 사상과 쿠텐베르크 프로젝트 원전을 확인할 수 있습니다.
+        시대 순 요약 대신 mind-body problem을 축으로 재정리했습니다. 항목을 클릭하면 쟁점과
+        구텐베르크 원문 연결을 확인할 수 있습니다.
       </p>
 
-      <section class="layout" aria-label="철학사 타임라인과 상세 내용">
+      <section class="layout" aria-label="심신문제 중심 철학사와 상세 내용">
         <article class="panel" aria-labelledby="timeline-title">
-          <h2 id="timeline-title">시대별 주요 철학자</h2>
+        <h2 id="timeline-title">심신문제 재구성 타임라인</h2>
           <ol class="timeline" id="timeline"></ol>
         </article>
 
         <article class="panel" aria-live="polite" aria-labelledby="detail-title">
           <h2 id="detail-title">상세 정보</h2>
-          <p id="period"><strong>시대:</strong> 선택되지 않음</p>
-          <p id="idea"><strong>핵심 사상:</strong> 이름을 클릭해 주세요.</p>
+          <p id="period"><strong>국면:</strong> 선택되지 않음</p>
+          <p id="idea"><strong>쟁점:</strong> 이름을 클릭해 주세요.</p>
           <div>
-            <strong>쿠텐베르크 프로젝트 원전:</strong>
+            <strong>구텐베르크 원문 연결:</strong>
             <ul id="links"></ul>
           </div>
         </article>
@@ -110,53 +111,93 @@
       const philosophers = [
         {
           name: "플라톤 (Plato)",
-          period: "고대 그리스 (기원전 4세기)",
-          idea: "이데아론: 감각 세계를 넘어선 영원한 진리를 탐구해야 한다.",
+          period: "고대: 영혼-육체 분리의 출발",
+          idea: "영혼(정신)의 우위와 불멸을 통해 정신과 신체를 비대칭적으로 이해한다.",
           links: [
-            { label: "The Republic", url: "https://www.gutenberg.org/ebooks/1497" },
             { label: "Phaedo", url: "https://www.gutenberg.org/ebooks/1658" }
           ]
         },
         {
-          name: "아우구스티누스 (Augustine)",
-          period: "중세 초기 (4~5세기)",
-          idea: "신앙과 이성의 조화: 인간의 내면 성찰을 통해 신과 진리를 찾는다.",
+          name: "아리스토텔레스 (Aristotle)",
+          period: "고대: 영혼을 몸의 형상으로 이해",
+          idea: "영혼은 몸과 분리된 물질이 아니라 생명체의 기능적 형상이라는 관점을 제시한다.",
           links: [
-            { label: "Confessions", url: "https://www.gutenberg.org/ebooks/3296" }
+            { label: "De Anima (On the Soul)", url: "https://www.gutenberg.org/ebooks/1904" }
           ]
         },
         {
           name: "르네 데카르트 (René Descartes)",
-          period: "근대 초기 (17세기)",
-          idea: "방법적 회의와 코기토: '나는 생각한다, 고로 존재한다.'",
+          period: "근대: 실체 이원론의 정식화",
+          idea: "정신과 신체를 서로 다른 실체로 구분해 심신문제를 철학의 중심 의제로 만든다.",
           links: [
+            { label: "Meditations on First Philosophy", url: "https://www.gutenberg.org/ebooks/23306" },
             { label: "Discourse on the Method", url: "https://www.gutenberg.org/ebooks/59" }
           ]
         },
         {
-          name: "임마누엘 칸트 (Immanuel Kant)",
-          period: "계몽주의 (18세기)",
-          idea: "인식은 경험과 선험적 형식의 결합으로 성립하며, 도덕은 자율적 이성에 기반한다.",
+          name: "토머스 홉스 (Thomas Hobbes)",
+          period: "근대: 기계론적 물질주의",
+          idea: "사유와 감정까지 운동과 물질의 인과로 설명하려 하며 이원론에 반대한다.",
           links: [
-            { label: "Prolegomena to Any Future Metaphysics", url: "https://www.gutenberg.org/ebooks/52821" },
-            { label: "Fundamental Principles of the Metaphysic of Morals", url: "https://www.gutenberg.org/ebooks/5682" }
+            { label: "Leviathan", url: "https://www.gutenberg.org/ebooks/3207" }
           ]
         },
         {
-          name: "프리드리히 니체 (Friedrich Nietzsche)",
-          period: "19세기", 
-          idea: "기존 도덕과 가치의 전복, 힘에의 의지와 자기극복.",
+          name: "바뤼흐 스피노자 (Baruch Spinoza)",
+          period: "근대: 일원론적 재구성",
+          idea: "정신과 신체를 하나의 실체에 대한 서로 다른 속성으로 파악해 심신문제의 틀을 바꾼다.",
           links: [
-            { label: "Thus Spake Zarathustra", url: "https://www.gutenberg.org/ebooks/1998" },
-            { label: "Beyond Good and Evil", url: "https://www.gutenberg.org/ebooks/4363" }
+            { label: "Ethics", url: "https://www.gutenberg.org/ebooks/3800" }
           ]
         },
         {
-          name: "한나 아렌트 (Hannah Arendt)",
-          period: "20세기",
-          idea: "정치적 행위와 공적 영역의 중요성, 전체주의에 대한 비판.",
+          name: "데이비드 흄 (David Hume)",
+          period: "근대-경험론: 자아와 인과의 해체",
+          idea: "지속적 실체로서의 자아를 의심하고 마음을 지각의 다발로 분석한다.",
           links: [
-            { label: "(독일어) Elemente und Ursprünge totaler Herrschaft", url: "https://www.gutenberg.org/ebooks/author/12540" }
+            { label: "A Treatise of Human Nature", url: "https://www.gutenberg.org/ebooks/4705" }
+          ]
+        },
+        {
+          name: "윌리엄 제임스 (William James)",
+          period: "심리학 전환: 의식의 흐름",
+          idea: "마음을 정적 실체가 아니라 기능적·흐름적 과정으로 다루며 인지과학의 전단계를 연다.",
+          links: [
+            { label: "The Principles of Psychology, Vol. 1", url: "https://www.gutenberg.org/ebooks/57628" },
+            { label: "The Principles of Psychology, Vol. 2", url: "https://www.gutenberg.org/ebooks/57629" }
+          ]
+        },
+        {
+          name: "버트런드 러셀 (Bertrand Russell)",
+          period: "분석철학: 논리와 마음",
+          idea: "심리적 설명을 논리·언어 분석으로 재정식화하며 mind-body 문제를 과학철학과 연결한다.",
+          links: [
+            { label: "The Analysis of Mind", url: "https://www.gutenberg.org/ebooks/2529" }
+          ]
+        },
+        {
+          name: "앨런 튜링 (Alan Turing)",
+          period: "컴퓨터과학: 기계적 마음 가설",
+          idea: "지능을 계산 가능한 과정으로 모델링하며 '기계가 생각할 수 있는가'를 실험 문제로 전환한다.",
+          links: [
+            { label: "Gutenberg: Alan Turing 검색", url: "https://www.gutenberg.org/ebooks/search/?query=alan+turing" }
+          ]
+        },
+        {
+          name: "존 매카시 · 마빈 민스키 (AI)",
+          period: "인공지능: 기호주의 모델",
+          idea: "마음을 기호 조작 시스템으로 구현하려는 시도를 통해 기능주의적 심리철학을 확장한다.",
+          links: [
+            { label: "Gutenberg: Artificial Intelligence 검색", url: "https://www.gutenberg.org/ebooks/search/?query=artificial+intelligence" }
+          ]
+        },
+        {
+          name: "현대 인지과학 (신경과학·예측처리)",
+          period: "동시대: 뇌-몸-환경 통합 모델",
+          idea: "심신문제를 뇌의 계산, 신체의 체화, 환경 상호작용의 통합 문제로 재구성한다.",
+          links: [
+            { label: "Gutenberg: Cognitive Science 검색", url: "https://www.gutenberg.org/ebooks/search/?query=cognitive+science" },
+            { label: "Gutenberg: Neuroscience 검색", url: "https://www.gutenberg.org/ebooks/search/?query=neuroscience" }
           ]
         }
       ];
@@ -167,8 +208,8 @@
       const links = document.getElementById("links");
 
       function showDetails(philosopher) {
-        period.innerHTML = `<strong>시대:</strong> ${philosopher.period}`;
-        idea.innerHTML = `<strong>핵심 사상:</strong> ${philosopher.idea}`;
+        period.innerHTML = `<strong>국면:</strong> ${philosopher.period}`;
+        idea.innerHTML = `<strong>쟁점:</strong> ${philosopher.idea}`;
         links.innerHTML = "";
 
         philosopher.links.forEach((source) => {
