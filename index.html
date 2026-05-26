@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>철학사 타임라인</title>
+    <style>
+      :root {
+        color-scheme: light;
+      }
+
+      body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: #f8fafc;
+        color: #0f172a;
+      }
+
+      main {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 24px;
+      }
+
+      h1 {
+        margin: 0 0 8px;
+      }
+
+      .subtitle {
+        margin: 0 0 24px;
+        color: #334155;
+      }
+
+      .layout {
+        display: grid;
+        grid-template-columns: 1.2fr 1fr;
+        gap: 16px;
+      }
+
+      .panel {
+        background: #fff;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 16px;
+      }
+
+      ol.timeline {
+        margin: 0;
+        padding-left: 20px;
+      }
+
+      .timeline li {
+        margin-bottom: 12px;
+      }
+
+      .timeline button {
+        border: none;
+        background: none;
+        color: #1d4ed8;
+        cursor: pointer;
+        padding: 0;
+        font-size: 1rem;
+        text-align: left;
+      }
+
+      .timeline button:hover,
+      .timeline button:focus-visible {
+        text-decoration: underline;
+        outline: none;
+      }
+
+      #links {
+        margin: 8px 0 0;
+        padding-left: 20px;
+      }
+
+      @media (max-width: 840px) {
+        .layout {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>철학사 타임라인</h1>
+      <p class="subtitle">
+        이름을 클릭하면 핵심 사상과 쿠텐베르크 프로젝트 원전을 확인할 수 있습니다.
+      </p>
+
+      <section class="layout" aria-label="철학사 타임라인과 상세 내용">
+        <article class="panel" aria-labelledby="timeline-title">
+          <h2 id="timeline-title">시대별 주요 철학자</h2>
+          <ol class="timeline" id="timeline"></ol>
+        </article>
+
+        <article class="panel" aria-live="polite" aria-labelledby="detail-title">
+          <h2 id="detail-title">상세 정보</h2>
+          <p id="period"><strong>시대:</strong> 선택되지 않음</p>
+          <p id="idea"><strong>핵심 사상:</strong> 이름을 클릭해 주세요.</p>
+          <div>
+            <strong>쿠텐베르크 프로젝트 원전:</strong>
+            <ul id="links"></ul>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <script>
+      const philosophers = [
+        {
+          name: "플라톤 (Plato)",
+          period: "고대 그리스 (기원전 4세기)",
+          idea: "이데아론: 감각 세계를 넘어선 영원한 진리를 탐구해야 한다.",
+          links: [
+            { label: "The Republic", url: "https://www.gutenberg.org/ebooks/1497" },
+            { label: "Phaedo", url: "https://www.gutenberg.org/ebooks/1658" }
+          ]
+        },
+        {
+          name: "아우구스티누스 (Augustine)",
+          period: "중세 초기 (4~5세기)",
+          idea: "신앙과 이성의 조화: 인간의 내면 성찰을 통해 신과 진리를 찾는다.",
+          links: [
+            { label: "Confessions", url: "https://www.gutenberg.org/ebooks/3296" }
+          ]
+        },
+        {
+          name: "르네 데카르트 (René Descartes)",
+          period: "근대 초기 (17세기)",
+          idea: "방법적 회의와 코기토: '나는 생각한다, 고로 존재한다.'",
+          links: [
+            { label: "Discourse on the Method", url: "https://www.gutenberg.org/ebooks/59" }
+          ]
+        },
+        {
+          name: "임마누엘 칸트 (Immanuel Kant)",
+          period: "계몽주의 (18세기)",
+          idea: "인식은 경험과 선험적 형식의 결합으로 성립하며, 도덕은 자율적 이성에 기반한다.",
+          links: [
+            { label: "Prolegomena to Any Future Metaphysics", url: "https://www.gutenberg.org/ebooks/52821" },
+            { label: "Fundamental Principles of the Metaphysic of Morals", url: "https://www.gutenberg.org/ebooks/5682" }
+          ]
+        },
+        {
+          name: "프리드리히 니체 (Friedrich Nietzsche)",
+          period: "19세기", 
+          idea: "기존 도덕과 가치의 전복, 힘에의 의지와 자기극복.",
+          links: [
+            { label: "Thus Spake Zarathustra", url: "https://www.gutenberg.org/ebooks/1998" },
+            { label: "Beyond Good and Evil", url: "https://www.gutenberg.org/ebooks/4363" }
+          ]
+        },
+        {
+          name: "한나 아렌트 (Hannah Arendt)",
+          period: "20세기",
+          idea: "정치적 행위와 공적 영역의 중요성, 전체주의에 대한 비판.",
+          links: [
+            { label: "(독일어) Elemente und Ursprünge totaler Herrschaft", url: "https://www.gutenberg.org/ebooks/author/12540" }
+          ]
+        }
+      ];
+
+      const timeline = document.getElementById("timeline");
+      const period = document.getElementById("period");
+      const idea = document.getElementById("idea");
+      const links = document.getElementById("links");
+
+      function showDetails(philosopher) {
+        period.innerHTML = `<strong>시대:</strong> ${philosopher.period}`;
+        idea.innerHTML = `<strong>핵심 사상:</strong> ${philosopher.idea}`;
+        links.innerHTML = "";
+
+        philosopher.links.forEach((source) => {
+          const item = document.createElement("li");
+          const anchor = document.createElement("a");
+          anchor.href = source.url;
+          anchor.target = "_blank";
+          anchor.rel = "noopener noreferrer";
+          anchor.textContent = source.label;
+          item.appendChild(anchor);
+          links.appendChild(item);
+        });
+      }
+
+      philosophers.forEach((philosopher, index) => {
+        const item = document.createElement("li");
+        const button = document.createElement("button");
+        button.type = "button";
+        button.textContent = philosopher.name;
+        button.setAttribute("aria-label", `${philosopher.name} 상세 보기`);
+        button.addEventListener("click", () => showDetails(philosopher));
+
+        item.appendChild(button);
+        timeline.appendChild(item);
+
+        if (index === 0) {
+          showDetails(philosopher);
+        }
+      });
+    </script>
+  </body>
+</html>
